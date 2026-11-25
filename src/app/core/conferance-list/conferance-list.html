@@ -1,0 +1,31 @@
+<h1>{{title}}</h1>
+<h2>{{x()}}</h2>
+<div>
+        <input type ="text" placeholder="taper le titre" [(ngModel)]="searchItem">  {{searchItem}}
+    </div>
+<div class="container" style="display: flex;flex-wrap: wrap;gap: 20px;">
+
+    
+    @for(conf of search();track conf.id){
+        @if(conf.nbPlaces>0){
+        
+    <div class="card" style="width: 18rem;">
+  <img src="{{conf.imageUrl}}" class="card-img-top" alt="conf image">
+  <div class="card-body">
+    <h5 class="card-title">{{conf.titre}}</h5>
+    <p class="card-text">{{conf.category}}</p>
+    <p>{{conf.date | date:'dd-MM-yyyy'}}</p>
+    <a href="#" class="btn btn-primary" (click)="addToFavorite(conf)"> add to favorite</a>
+  </div>
+</div>}
+}@empty {
+<h2>aucune conferance n'est disponible pour le moment</h2>
+}
+</div>
+
+<div>
+    <ul>
+    @for(fconf of favoriteListe(); track fconf.id){
+    <li>{{fconf().titre}}</li>}
+    </ul>
+</div>
